@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Transactions</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{/transactions.css}" />
+    <link rel="stylesheet" th:href="@{/general.css}" />
+</head>
+<body>
+<div class="container">
+    <h1 class="transactions-title">Transactions</h1>
+    <p>
+        <a th:href="@{/transactions/new}">Add transaction</a>
+        &nbsp;|&nbsp;
+        <a th:href="@{/}">Home</a>
+    </p>
+
+    <h3>Balance: <span th:text="${balance}"></span></h3>
+
+    <table class="transactions-table">
+        <thead>
+        <tr>
+            <th>Date</th>
+            <th>Description</th>
+            <th>Category</th>
+            <th>Type</th>
+            <th>Amount</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="tx : ${transactions}">
+            <td th:text="${tx.date}"></td>
+            <td th:text="${tx.description}"></td>
+            <td th:text="${tx.category}"></td>
+            <td th:text="${tx.type}"></td>
+            <td class="amount" th:classappend="${tx.type == 'CREDIT'} ? ' credit' : ' debit'" th:text="${tx.amount}"></td>
+        </tr>
+        </tbody>
+    </table>
+    
+    <!-- Chart removed to restore simpler, stable page -->
+</div>
+</body>
+</html>

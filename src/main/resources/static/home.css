@@ -1,0 +1,15 @@
+.container { color: white; margin-top: 2rem;}
+
+.title-text {display:flex;
+    justify-content:center;
+    font-size:2.75rem;
+    width:30%;
+    margin: 0 auto;
+}
+
+.transactions-link {display:flex;
+    justify-content:center;
+    font-size:1.25rem;
+    width: 25%;
+    margin: 0 auto;
+}

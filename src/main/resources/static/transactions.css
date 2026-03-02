@@ -1,0 +1,41 @@
+.container {
+    background-color: #444444;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: 0 auto;
+    padding: 18px;
+    border-radius: 8px;
+}
+
+/* Clean table styling while keeping existing colors */
+.transactions-table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:12px;
+    background: transparent;
+}
+.transactions-table thead th{
+    text-align:left;
+    padding:10px 12px;
+    font-weight:700;
+    border-bottom:2px solid rgba(255,255,255,0.12);
+}
+.transactions-table tbody td{
+    padding:10px 12px;
+    border-bottom:1px solid rgba(255,255,255,0.06);
+}
+.transactions-table tbody tr:last-child td{ border-bottom: none; }
+
+/* keep amount color semantics but ensure readable font weight */
+.amount{ font-weight:600 }
+.amount.credit{ color: #059669; }
+.amount.debit{ color: #ef4444; }
+
+/* form tweaks for new_transaction page */
+.tx-form{ max-width:700px; margin-top:12px }
+.tx-form .form-row{ margin:10px 0 }
+.tx-form label{ display:block; color: white; font-size:0.95rem; margin-bottom:6px }
+.tx-form input, .tx-form select{ width:100%; padding:8px 10px; border-radius:6px; border:1px solid rgba(255,255,255,0.12); background:rgba(255,255,255,0.03); color:white }
+.tx-form button{ margin-top:8px; padding:10px 14px; border-radius:6px; background:#064e3b; color:white; border:none }
+.field-error{ color:#ffcccc; font-size:0.9rem; margin-top:6px }

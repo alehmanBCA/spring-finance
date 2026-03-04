@@ -23,7 +23,6 @@ public class TransactionController {
         this.service = service;
     }
 
-    // root mapping is provided by HomeController; leave transaction routes under /transactions
 
     @GetMapping("/transactions")
     public String list(Model model) {
@@ -31,7 +30,6 @@ public class TransactionController {
         model.addAttribute("transactions", txs);
         model.addAttribute("balance", service.getBalance());
 
-        // transactions list is available in the model; template will build chart data with Thymeleaf
         return "transactions";
     }
 

@@ -1,5 +1,6 @@
 package org.example.springm2a1.model;
 
+import jakarta.persistence.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import jakarta.validation.constraints.DecimalMin;
@@ -7,9 +8,13 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
+@Entity
 public class Transaction {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull(message = "Date is required")
@@ -24,68 +29,38 @@ public class Transaction {
     private BigDecimal amount;
 
     @NotBlank(message = "Type is required")
-    // expected values: CREDIT or DEBIT
-    private String type;
+    private String type; // CREDIT or DEBIT
 
     private String category;
 
-    public Transaction() {
-    }
+    // Many-to-one: many transactions belong to one user
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User owner;
 
-    public Transaction(Long id, LocalDate date, String description, BigDecimal amount, String type, String category) {
-        this.id = id;
-        this.date = date;
-        this.description = description;
-        this.amount = amount;
-        this.type = type;
-        this.category = category;
-    }
+    // Many-to-many with Tag
+    @ManyToMany
+    @JoinTable(name = "transaction_tags",
+            joinColumns = @JoinColumn(name = "transaction_id"),
+            inverseJoinColumns = @JoinColumn(name = "tag_id"))
+    private Set<Tag> tags = new HashSet<>();
 
-    public Long getId() {
-        return id;
-    }
+    public Transaction() {}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public BigDecimal getAmount() {
-        return amount;
-    }
-
-    public void setAmount(BigDecimal amount) {
-        this.amount = amount;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+    public LocalDate getDate() { return date; }
+    public void setDate(LocalDate date) { this.date = date; }
+    public String getDescription() { return description; }
+    public void setDescription(String description) { this.description = description; }
+    public BigDecimal getAmount() { return amount; }
+    public void setAmount(BigDecimal amount) { this.amount = amount; }
+    public String getType() { return type; }
+    public void setType(String type) { this.type = type; }
+    public String getCategory() { return category; }
+    public void setCategory(String category) { this.category = category; }
+    public User getOwner() { return owner; }
+    public void setOwner(User owner) { this.owner = owner; }
+    public Set<Tag> getTags() { return tags; }
+    public void setTags(Set<Tag> tags) { this.tags = tags; }
 }
